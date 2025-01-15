@@ -1,0 +1,348 @@
+@font-face {
+    font-family: "Playfair Display";
+    src: url("/fonts/OpenSans-Regular.woff2") format("woff2");
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root{
+  --color-bg-menu: #0e1012;
+  --color-text: #fff;
+  --color-bg-main: #1e2224;
+  --color-bg-header: #454545;
+  --color-bg-dashboard: #2c3031;
+  --color-border: #585858 ;
+  --color-snow: #c1dcec ;
+  --color-bg-table:#414a50;
+  --color-head-table:#444441;
+  --color-text-table:#252525;
+  --color-table-even:#e7e7e7;
+  --color-table-odd: #d4d4d4;
+  --color-text-headertable: #343535 ;
+  --color-background-focus: #a7a7a7;
+}
+
+#white{
+  --color-bg-menu: #6a6c6e;
+  --color-text: #000000;
+  --color-bg-main: #676969;
+  --color-bg-header: #fffdfd;
+  --color-bg-dashboard: #939596;
+  --color-border: #292929 ;
+  --color-snow: #08090a ;
+  --color-bg-table:#1e2022;
+  --color-head-table:#444441;
+  --color-text-table:#252525;
+  --color-table-even:#333333;
+  --color-table-odd: #808080;
+  --color-text-headertable: #343535 ;
+}
+
+
+/* Очистка стилей */
+* { margin: 0; padding: 0; border: 0; box-sizing: border-box; }
+
+
+
+html, body {
+  width: 100%;
+  margin: 0; 
+  padding: 0; 
+  display: flex;
+  font-family: "Playfair Display";
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+body{
+  min-height: 100%;
+}
+
+.container{
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  border: 1px solid black;
+  padding: 10px;
+  background: var(--color-bg-main) ;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.container .main-board{
+  position: relative;
+  display: flex;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  
+}
+
+.dashboard .main-header{
+width: 100%;
+background-color: var(--color-bg-header);
+color: var(--color-text);
+text-align: center;
+box-sizing: border-box;
+padding: 10px;
+display: flex; 
+justify-content: center;  
+position: relative; 
+}
+
+
+
+.oflline-table{
+  display: inline;
+  width: 100%;
+  min-height: 100%;
+  margin: 3px;
+}
+.table-name{
+  position: relative;
+  color: var(--color-bg-menu);
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-table-odd);
+  text-align: center;
+  border: 2px solid var(--color-bg-main);
+  padding: 15px;
+}
+
+.table-dashboard, .oflline-table .table-dashboard{
+  width: 100%;
+	border: none;
+	margin-bottom: 20px;
+}
+
+.table-dashboard thead{
+  position: sticky;
+  width: 100%;
+  table-layout: fixed;
+
+}
+
+thead th{
+  font-weight: bold;
+	text-align: left;
+	border: none;
+	padding: 10px 15px;
+	background: #d8d8d8;
+	font-size: 14px;
+}
+
+.table-card, .table-card-default {
+  position: relative;
+  width: 100%;
+}
+
+
+.table-card tr td, .table-card-default tr td{
+  text-align: left;
+	border: none;
+	padding: 10px 15px;
+	font-size: 14px;
+	vertical-align: top;
+  text-align: center;
+  color: var(--color-text-headertable);
+}
+
+.table-card tr:nth-child(even), .table-card-default tr:nth-child(even){
+  background: var(--color-table-even);
+}
+.table-card tr:nth-child(odd), .table-card-default tr:nth-child(odd){
+  background: var(--color-table-odd);
+}
+
+.table-card tr:hover{
+  background-color: var(--color-background-focus);
+  transition: 1s;
+}
+
+.table-card-default tr:hover{
+  background-color: var(--color-background-focus);
+  transition: 1s;
+}
+
+.tables-information{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+
+.menu { 
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 3px;
+  left: -12px;
+  z-index: 2;
+  height: 100%;
+  
+}
+
+.burger-checkbox {
+  position: absolute;
+  visibility: hidden;
+    
+}
+.burger {
+  position: relative;
+  top: 5px;
+  left: 15px;
+  z-index: 1;
+  cursor: pointer;
+  display: block;
+  border: none;
+  background: transparent;
+  width: 40px;
+  height: 26px;
+}
+.burger::before,
+.burger::after {
+    content: '';
+    left: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-radius: 10px;
+    background: var(--color-text);
+  }
+.burger::before {
+  top: 0;
+  box-shadow: 0 11px 0 var(--color-text);
+  transition: box-shadow .3s .15s, top .3s .15s, transform .3s;
+}
+.burger::after {
+   bottom: 0;
+   transition: bottom .3s .15s, transform .3s;
+   
+}
+.burger-checkbox:checked + .burger::before {
+  top: 11px;
+  transform: rotate(45deg);
+  box-shadow: 0 6px 0 rgba(255, 255, 255, 0);
+  transition: box-shadow .15s, top .3s, transform .3s .15s;
+  position: relative;
+}
+.burger-checkbox:checked + .burger::after {
+  bottom: 11px;
+  transform: rotate(-45deg);
+  transition: bottom .3s, transform .3s .15s;
+}
+
+.menu-list {
+  top: -15px;
+  left: 0;
+  position: absolute;
+  display:flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 42px 0;
+  margin: 0;
+  background: var(--color-bg-menu);
+  list-style-type: none;
+  transform: translateX(-100%);
+  transition: .3s;
+  width: 250px;
+  text-align: center;
+  height: 100%;
+  
+}
+.menu-item {
+  display: block;
+  padding: 8px;
+  color: var(--color-text);
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  margin: 10px 0;
+}
+.form-search{
+  margin: 0px;
+  padding: 0%;
+  position: relative;
+  height: 36px;
+}
+.form-search .search-icon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0%;
+  background-color: transparent;
+  background: url("/img/5402443_search_find_magnifier_magnifying_magnifying\ glass_icon.svg") no-repeat ;
+}
+.form-search .search-element{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-right: 32px;
+  color: var(--color-text);
+  background-color: var(--color-bg-main);
+  border: 3px solid var(--color-border);
+  border-radius: 10px;
+}
+
+form{
+  display: block;
+  unicode-bidi: isolate;
+}
+
+.menu-item:hover {
+  background: rgba(255,255,255,.2);
+}
+.burger-checkbox:checked ~ .menu-list {
+  transform: translateX(0);
+}
+
+.main-board .dashboard{
+  background-color: var(--color-bg-dashboard);
+  width: 100%;
+  min-height: 100%;
+}
+
+.snow{
+  display: flex;
+  justify-content: space-between;
+}
+
+.snow__flake{
+  color: var(--color-snow);
+  position: relative;
+  top: -1.5em;
+  animation-name: snowfall;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform;
+  
+}
+
+.snow {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+
+@keyframes snowfall{
+  from{
+    transform: translateY(0);
+  }
+
+  to{
+    transform: translateY(calc(100vh + 1.5em));
+  }
+}

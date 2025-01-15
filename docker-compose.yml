@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:5080"
+    environment:
+      - DB_HOST=mariadb
+      - DB_USER=monitoringAdm
+      - DB_PASSWORD=Dimok22123
+      - DB_NAME=Monitoring
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:lts-ubi9
+    restart: always
+     environment:
+      MYSQL_USER: monitoringAdm                   # Имя пользователя
+      MYSQL_PASSWORD: Dimok22123
+      MYSQL_DATABASE: Monitoring
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:

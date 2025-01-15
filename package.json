@@ -1,0 +1,18 @@
+{
+  "name": "dashboardweb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0",
+    "ping": "^0.4.4"
+  }
+}

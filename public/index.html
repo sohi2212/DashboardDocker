@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/nightmode.css">
+    
+    <meta charset="UTF-8">
+    <title>Main Menu</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main-board">
+            <div class="dashboard">
+                <div class="menu">
+                    <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+                    <label for="burger-checkbox" class="burger"></label>
+                    <ul class="menu-list">
+                        <div>
+                            <li><img class="menu-item" src="/img/logo_wvW4FDd5.png" alt="logo"></li>
+                        </div>
+                        <form action="#" class="form-search">
+                            <input type="text" name="search-element" class="search-element">
+                            <button type="submit" class="search-icon" title="Поиск"></button>
+                        </form>
+                        <li><a href="" class="menu-item">Главная</a></li>
+                        <li><a href="" class="menu-item">Мониторинг</a></li>
+                        <li><a href="" class="menu-item">Добавить камеру</a></li>
+                        <li><a href="http://192.168.17.32:5000/" class="menu-item">Генератор конфигов</a></li>
+                        <li><a href="http://192.168.17.32:5020/" class="menu-item">Сканер подсетей</a></li>
+                        <li><a href="http://192.168.17.32:3000/" class="menu-item">SpeedTest</a></li>
+                        <li><a href="http://oxidized.istranet.lan/nodes" class="menu-item">Oxidized</a></li>
+                    </ul>
+                </div>
+                <header class="main-header" >Список неактивных камер
+                    <div class="night-mode">
+                        <input type="checkbox" class="switch">  
+                    </div>
+                </header>
+                <div class="tables-information">
+                    <div class="oflline-table">
+                        <header class="table-name">Камеры безопасного региона</header>
+                        <table class="table-dashboard">
+                                <thead>
+                                    <th>IP Address</th>
+                                    <th>Описание</th>
+                                    <th>Адрес</th>
+                                    <th>Статус мониторинга</th>
+                                </thead>
+                            <tbody class="table-card">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="oflline-table">
+                        <header class="table-name">Клиентские камеры</header>
+                        <table class="table-dashboard">
+                            <thead>
+                                <th>IP Address</th>
+                                <th>Описание</th>
+                                <th>Адрес</th>
+                                <th>Статус мониторинга</th>
+                            </thead>
+                        <tbody class="table-card-default">
+                            
+                        </tbody>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="snow">
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div> 
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+        <div class="snow__flake">*</div>
+    </div>
+    <script src="scripts/switchstyle.js"></script>
+    <script src="scripts/snowfalling.js"></script>
+    <script src="../src/controllers/monitoring.controller.js"></script>
+</body>
