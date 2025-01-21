@@ -8,10 +8,14 @@ WORKDIR /app
 COPY package*.json ./
 
 # Устанавливаем зависимости
-RUN npm install
+RUN npm install &&\ 
+    apt-get update && \
+    apt-get install -y iputils-ping
+    
 
 # Копируем весь проект в контейнер
 COPY . .
+
 
 # Указываем порт, который будет открыт
 EXPOSE 3000

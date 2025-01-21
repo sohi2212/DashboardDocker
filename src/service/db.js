@@ -2,8 +2,8 @@ import mysql from 'mysql2';
 import util from 'util';
 
 const dbConfig = {
-            host: "192.168.17.173",
-            port: "3307",
+            host: "192.168.17.32",
+            port: "3306",
             user: "monitoringAdm",
             password: "Dimok22123",
             database: "Monitoring"

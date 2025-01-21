@@ -1,5 +1,4 @@
-import e from 'express';
-import db from './db.js'
+import db from './db.js';
 
 export class GetOfflineCameras{
     async getCamerasSafeCity(){
