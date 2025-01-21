@@ -1,9 +1,9 @@
-import express from 'express'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { GetOfflineCameras } from './service/monitoring.service.js'
-import './service/ping.networks.service.js'
-
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { GetOfflineCameras } from './service/monitoring.service.js';
+import './service/ping.networks.service.js';
+import searchRoutes from './routes/searchRoutes.js';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -15,7 +15,6 @@ app.use('/src', express.static(path.join(__dirname, '../src')));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
-
 
 app.get('/api/cameras', async (req, res) => {
     const cameraService = new GetOfflineCameras();
@@ -38,10 +37,11 @@ app.get('/api/defaultCameras', async(req, res) => {
         console.log("Ошибка к запросу: " + error)
         res.status(500).send(error)
     }
-})
-
+});
 
 app.use(express.json());
+
+app.use('/api', searchRoutes); // Использование маршрутов
 
 app.listen(5080, () => {
     console.log('Поехала шайтан машина!');
