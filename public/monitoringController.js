@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async() => {
                     let cardHTML = card
                         .replace("{{IpAddress}}", camera.IpAddress)
                         .replace("{{Description}}", camera.Description)
-                        .replace("{{Location}}", camera.Location) // <- Исправлено
+                        .replace("{{Location}}", camera.Location) 
                         .replace("{{IsMonitored}}", camera.IsMonitored ? "✅" : "❌");
 
                     const row = document.createElement('tr');

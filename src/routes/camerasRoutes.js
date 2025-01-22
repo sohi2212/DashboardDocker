@@ -1,5 +1,5 @@
 import express from 'express';
-import { getCamerasSafeCity, getCamerasDefault } from '../controllers/camerasController.js';
+import { getCamerasSafeCity, getCamerasDefault } from '../controllers/camerasController.js'
 
 const router = express.Router();
 

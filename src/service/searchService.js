@@ -1,4 +1,4 @@
-import db from '../service/db.js';
+import db from './db.js';
 
 export const getSearchResults = async(req, res) => {
     const ip = req.body.query;
