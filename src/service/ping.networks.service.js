@@ -1,8 +1,7 @@
 import mysql from 'mysql2/promise';
 import ping from "ping";
 import pLimit from 'p-limit';
-import { currentTime } from './timeUtils.js';
-import chalk from 'chalk';
+import logger from '../utils/logger.js';
 
 const dbConfig = {
     host: "192.168.17.32",
@@ -72,7 +71,7 @@ async function pingAndProcessIP(ip, connection) {
                 resolve(isAlive);
             });
         });
-        console.log(chalk.yellow(`[${currentTime()}]IP-адрес ${ip} ${isAlive ? 'доступен' : 'недоступен'}`));
+        logger.info(`IP-адрес ${ip} ${isAlive ? 'доступен' : 'недоступен'}`);
 
         if (isAlive) {
             const [result] = await connection.execute(`SELECT IsOnline FROM Cameras WHERE IpAddress = ?`, [ip]);
@@ -87,37 +86,38 @@ async function pingAndProcessIP(ip, connection) {
                         `INSERT INTO Cameras (IpAddress, Location, Description, IsOnline, Subnet, IsMonitored) VALUES (?, "unknown", "unknown", "1", ?, "1")`,
                         [ip, subnet]
                     );
-                    console.log(chalk.green(`[${currentTime()}]Камера с IP "${ip}" успешно добавлена в базу данных!`));
+                    logger.info(`Камера с IP "${ip}" успешно добавлена в базу данных!`);
                 } else {
                     await connection.execute(
                         `INSERT INTO Cameras (IpAddress, Location, Description, IsOnline, Subnet, IsMonitored) VALUES (?, "unknown", "SafeCity", "1", ?, "1")`,
                         [ip, subnet]
                     );
-                    console.log(chalk.green(`[${currentTime()}]Камера с IP "${ip}" успешно добавлена в базу данных (SafeCity)!`));
+                    logger.info(`Камера с IP "${ip}" успешно добавлена в базу данных (SafeCity)!`);
                 }
             }
         } else {
             const [result] = await connection.execute(`UPDATE Cameras SET IsOnline = "0" WHERE IpAddress = ?`, [ip]);
             if (result.affectedRows > 0) {
-                console.log(chalk.red(`[${currentTime()}]Статус '${ip}' изменен на офлайн!`));
+                logger.warn(`Статус '${ip}' изменен на офлайн!`);
                 if(!offlineIPs.includes(ip)){
                     offlineIPs.push(ip);
-                    console.log(chalk.red(`[${currentTime()}]Добавлен в список!`))
+                    logger.info(`Камера ${ip} добавлена в список!`);
                 }
             }else{
-                console.log(chalk.yellow(`[${currentTime()}]Камеры ${ip} нет в базе!`))
+                logger.info(`Камеры ${ip} нет в базе!`);
             }
         }
     } catch (error) {
-        console.error(chalk.bgRed(`[${currentTime()}]Ошибка при обработке IP '${ip}': ${error.message}`));
+        logger.error(`Ошибка при обработке IP '${ip}': ${error.message}`);
     }
 }
 
 async function retryOfflineIPs() {
-    console.log(chalk.yellow(`[${currentTime()}]Начало повторного пингования недоступных IP-адресов...`));
+    logger.info(`Начало повторной проверки недоступных IP-адресов...`);
     const connection = await mysql.createConnection(dbConfig);
     for (let i = offlineIPs.length - 1; i >= 0; i--) {
         const ip = offlineIPs[i];
+        logger.info(`Повторный запрос к ${ip}`);
         try {
             const isAlive = await new Promise(resolve => {
                 ping.sys.probe(ip, isAlive => {
@@ -126,11 +126,11 @@ async function retryOfflineIPs() {
             });
             if (isAlive) {
                 await connection.execute(`UPDATE Cameras SET IsOnline = "1" WHERE IpAddress = ?`, [ip]);
-                console.log(chalk.green(`[${currentTime()}]Камера '${ip}' снова online!`));
+                logger.info(`Камера '${ip}' снова online!`);
                 offlineIPs.splice(i, 1); // Удаляем IP из списка
             }
         } catch (error) {
-            console.error(chalk.bgRed(`[${currentTime()}]Ошибка при повторном пинге IP '${ip}': ${error.message}`));
+            logger.error(`Ошибка при повторном пинге IP '${ip}': ${error.message}`);
         }
     }
     await connection.end();
@@ -138,7 +138,7 @@ async function retryOfflineIPs() {
 
 
 async function startRetryLoop() {
-    console.log(`[${currentTime()}]Начало повторной проверки недоступных IP-адресов...`);
+    logger.info(`Начало повторной проверки недоступных IP-адресов...`);
     setInterval(async () => {
         await retryOfflineIPs();
     }, 10000)
@@ -152,7 +152,7 @@ async function pingAllAddresses() {
 }
 
 async function startPingLoop() {
-    console.log(`[${currentTime()}]Начало пингования адресов...`);
+    logger.info(`Начало проверки адресов...`);
     while (true) {
         await pingAllAddresses();
         await new Promise(resolve => setTimeout(resolve, 3000)); // Увеличиваем задержку до 3 секунд для снижения нагрузки

@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import searchRoutes from './routes/searchRoutes.js';
 import camerasRoutes from './routes/camerasRoutes.js';
 import './service/ping.networks.service.js';
+import logger from './utils/logger.js';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -25,5 +26,5 @@ app.use('/api', searchRoutes);
 app.use('/api', camerasRoutes);
 
 app.listen(5080, () => {
-    console.log('Поехала шайтан машина!');
+    logger.info('Поехала шайтан машина!');
 });
