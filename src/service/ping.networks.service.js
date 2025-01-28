@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
 import ping from "ping";
 import pLimit from 'p-limit';
-import logger from '../utils/logger.js';
+import Logger from  '../utils/logger.js';
 
 const dbConfig = {
     host: "192.168.17.32",
@@ -13,6 +13,8 @@ const dbConfig = {
 
 // Ограничение на количество параллельных пингов
 const limit = pLimit(20); 
+
+const logger = new Logger();
 
 async function getSubnet(IpAddress) {
     const octets = IpAddress.split('.');
@@ -157,6 +159,7 @@ async function startPingLoop() {
         await pingAllAddresses();
         await new Promise(resolve => setTimeout(resolve, 3000)); // Увеличиваем задержку до 3 секунд для снижения нагрузки
     }
+    
 }
 
 

@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', async() => {
+    //выгрузка камер SafeCity
     try {
         const resSafeCity = await fetch("/api/cameras");
         if (!resSafeCity.ok) {
@@ -34,6 +35,8 @@ document.addEventListener('DOMContentLoaded', async() => {
         console.error("Ошибка: ", error);
     }
 
+
+    //Выгрузка стандартных камер
     try {
         const res = await fetch('/api/defaultCameras');
         if (!res.ok) {
@@ -70,4 +73,60 @@ document.addEventListener('DOMContentLoaded', async() => {
     } catch (error) {
         console.error("Ошибка: ", error);
     }
+    //CountSafeCity
+    try{
+        const res = await fetch("/api/camerasCount")
+        if(!res.ok){
+            console.log("Ошибка подключения к api");
+        }
+        const data = await res.json();
+
+        const safeCityCountOffline = document.querySelector('.count-safe-city');
+        const safeCityCountOnline = document.querySelector('.online-count-safecity');
+
+        if(safeCityCountOffline){
+            safeCityCountOffline.innerText = data.offlineCount[0]["COUNT(*)"];
+        }else{
+            console.log("Элемент Count не найден");
+        }
+
+        if(safeCityCountOnline){
+            safeCityCountOnline.innerText = data.onlineCount[0]["COUNT(*)"];
+        }else{
+            console.log("Элемент Count не найден");
+        }
+        
+
+    }catch(error){
+        console.error("Ошибка: ", error);
+    }
+    //CountDefaultCameras
+    try{
+        const res = await fetch("/api/defaultCamerasCount")
+        if(!res.ok){
+            console.log("Ошибка подключения к api");
+        }
+        const data = await res.json();
+
+        const defaultCountOffline = document.querySelector('.count-default');
+        const defaultCountOnline = document.querySelector('.online-count-default');
+
+        if(defaultCountOffline){
+            defaultCountOffline.innerText = data.offlineCount[0]["COUNT(*)"];
+        }else{
+            console.log("Элемент Count не найден");
+        }
+
+        if(defaultCountOnline){
+            defaultCountOnline.innerText = data.onlineCount[0]["COUNT(*)"];
+        }else{
+            console.log("Элемент Count не найден");
+        }
+        
+
+
+    }catch(error){
+        console.error("Ошибка: ", error);
+    }
+
 });

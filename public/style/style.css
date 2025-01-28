@@ -93,37 +93,103 @@ justify-content: center;
 position: relative; 
 }
 
-
-
 .oflline-table{
   display: inline;
   width: 100%;
-  min-height: 100%;
+  max-height: 400px;
   margin: 3px;
+  overflow-y: auto;
+  padding-left: 16px;
+  padding-right: 16px;
 }
+
+
+.oflline-table::-webkit-scrollbar{
+  width: 0px;
+  background-color: transparent;
+}
+.oflline-table::-webkit-scrollbar-thumb{
+  background-color: transparent;
+}
+.oflline-table::-webkit-scrollbar-track{
+  background-color: transparent
+}
+
 .table-name{
-  position: relative;
-  color: var(--color-bg-menu);
+  color: var(--color-text);
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--color-table-odd);
+  background-color: var(--color-bg-main);
   text-align: center;
-  border: 2px solid var(--color-bg-main);
-  padding: 15px;
+  border: 2px solid var(--color-border);
+  padding: 8px;
+  z-index: 1;
+  position: sticky;
 }
 
-.table-dashboard, .oflline-table .table-dashboard{
-  width: 100%;
+.oflline-item-curcle{
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  right: 62px;
+  top: 12px;
+  width: 15px;
+  height: 15px;
+}
+
+.online-item-curcle{
+  border-radius: 50%;
+  background-color: rgb(87, 255, 36);
+  position: absolute;
+  top: 12px;
+  right: 130px;
+  height: 15px;
+  width: 15px;
+}
+
+.table-dashboard{
+  width: 99%;
 	border: none;
 	margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.count-default{
+  font-weight: bold;
+  color: red;
+  position: absolute;
+  right: 36px;
+  top: 8px;
+}
+
+.online-count-default{
+  color: rgb(87, 255, 36);
+  font-weight: bold;
+  position: absolute;
+  right: 89px;
+  top: 8px;
+}
+
+.count-safe-city{
+  font-weight: bold;
+  color: red;
+  position: absolute;
+  right: 36px;
+  top: 8px;
+}
+
+.online-count-safecity{
+  color: rgb(87, 255, 36);
+  font-weight: bold;
+  position: absolute;
+  right: 89px;
+  top: 8px;
 }
 
 .table-dashboard thead{
-  position: sticky;
   width: 100%;
   table-layout: fixed;
-
 }
 
 thead th{
@@ -131,8 +197,10 @@ thead th{
 	text-align: left;
 	border: none;
 	padding: 10px 15px;
-	background: #d8d8d8;
+	background-color: transparent;
 	font-size: 14px;
+  text-align: center;
+  justify-content: center;
 }
 
 .table-card, .table-card-default {
@@ -140,39 +208,54 @@ thead th{
   width: 100%;
 }
 
-
-.table-card tr td, .table-card-default tr td{
-  text-align: left;
-	border: none;
-	padding: 10px 15px;
-	font-size: 14px;
-	vertical-align: top;
+tr{
+  background-color: transparent;
+  color: var(--color-text);
   text-align: center;
-  color: var(--color-text-headertable);
 }
 
-.table-card tr:nth-child(even), .table-card-default tr:nth-child(even){
-  background: var(--color-table-even);
-}
-.table-card tr:nth-child(odd), .table-card-default tr:nth-child(odd){
-  background: var(--color-table-odd);
+tr td{
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-bg-table);
 }
 
-.table-card tr:hover{
-  background-color: var(--color-background-focus);
-  transition: 1s;
-}
-
-.table-card-default tr:hover{
-  background-color: var(--color-background-focus);
-  transition: 1s;
-}
 
 .tables-information{
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
 }
+
+tbody{
+  tr{
+    &:hover{
+      background-color: rgba(255,255,255,0.3);
+    }
+  }
+  td{
+    position: relative;
+    &:hover{
+      &::before{
+        content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				background-color: rgba(255,255,255,0.2);
+				z-index: -1;
+      }
+    }
+  }
+  .ipaddress:hover{
+    border-left: 2px solid red;
+  }
+}
+
+th.status-header,
+td.status-monitoring{
+  width: 80px;
+}
+
+
 
 .menu { 
   position: absolute;
@@ -193,8 +276,8 @@ thead th{
 .burger {
   position: relative;
   top: 5px;
-  left: 15px;
-  z-index: 1;
+  left: 25px;
+  z-index: 330;
   cursor: pointer;
   display: block;
   border: none;
@@ -252,7 +335,7 @@ thead th{
   width: 250px;
   text-align: center;
   height: 100%;
-  
+  z-index: 320;
 }
 .menu-item {
   display: block;
@@ -262,6 +345,7 @@ thead th{
   text-align: center;
   text-decoration: none;
   margin: 10px 0;
+  z-index: 310;
 }
 .form-search{
   margin: 0px;
@@ -308,6 +392,8 @@ form{
   background-color: var(--color-bg-dashboard);
   width: 100%;
   min-height: 100%;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
 .snow{
