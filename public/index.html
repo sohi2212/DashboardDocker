@@ -19,10 +19,10 @@
                             <div>
                                 <li><img class="menu-item" src="/img/logo_wvW4FDd5.png" alt="logo"></li>
                             </div>
-                            <form action="#" class="form-search">
+                            <div class="form-search">
                                 <input type="text" name="search-element" class="search-element">
                                 <button type="submit" class="search-icon" title="Поиск" data-bs-toggle="modal" data-bs-target="#search-card"></button>
-                            </form>
+                            </div>
                             <li><a href="" class="menu-item">Главная</a></li>
                             <li><a href="" class="menu-item">Мониторинг</a></li>
                             <li><a href="" class="menu-item">Добавить камеру</a></li>
@@ -107,6 +107,31 @@
             <div class="snow__flake">*</div>
             <div class="snow__flake">*</div>
         </div>
+        
+        <!-- Modal -->
+         <dialog class="modal-cameras-info">
+            <header class="modal-header">
+                <h3 class="header-ip">123141241</h3>
+                <button class="close-modal-button">X</button>
+            </header>
+            <div class="modal-wrapper">
+                <p class="modal-text">ID:</p>
+                <p class="camera-id-modal">1</p>
+                <p class="modal-text">Интерфейс:</p>
+                <p class="interface-modal">1</p>
+                <p class="modal-text">Местоположение камеры:</p>
+                <p class="location-modal">2</p>
+                <p class="modal-text">Описание камеры:</p>
+                <p class="description-modal">3</p>
+                <p class="modal-text">Статус мониторинга: </p>
+                <p class="monitoing-status-modal">4</p>
+                <p class="modal-text">Статус камеры: </p>
+                <p class="camera-status">5</p>
+            </div>
+         </dialog>
+        <!-- Modal -->
+
+
         <script src="scripts/switchstyle.js"></script>
         <script src="scripts/snowfalling.js"></script>
         <script src="./monitoringController.js"></script>

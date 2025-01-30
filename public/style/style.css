@@ -55,9 +55,6 @@ html, body {
   justify-content: flex-start;
 }
 
-body{
-  min-height: 100%;
-}
 
 .container{
   position: relative;
@@ -130,7 +127,8 @@ position: relative;
 
 .oflline-item-curcle{
   border-radius: 50%;
-  background-color: red;
+  background-color: transparent;
+  border: 2px solid rgb(156, 1, 1);
   position: absolute;
   right: 62px;
   top: 12px;
@@ -140,7 +138,8 @@ position: relative;
 
 .online-item-curcle{
   border-radius: 50%;
-  background-color: rgb(87, 255, 36);
+  background-color: transparent;
+  border: 2px solid green;
   position: absolute;
   top: 12px;
   right: 130px;
@@ -157,14 +156,14 @@ position: relative;
 
 .count-default{
   font-weight: bold;
-  color: red;
+  color: rgb(156, 1, 1);
   position: absolute;
   right: 36px;
   top: 8px;
 }
 
 .online-count-default{
-  color: rgb(87, 255, 36);
+  color: green;
   font-weight: bold;
   position: absolute;
   right: 89px;
@@ -173,14 +172,14 @@ position: relative;
 
 .count-safe-city{
   font-weight: bold;
-  color: red;
+  color: rgb(156, 1, 1);
   position: absolute;
   right: 36px;
   top: 8px;
 }
 
 .online-count-safecity{
-  color: rgb(87, 255, 36);
+  color: green;
   font-weight: bold;
   position: absolute;
   right: 89px;
@@ -422,6 +421,84 @@ form{
   z-index: 100;
 }
 
+dialog.modal-cameras-info{
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  max-height: 400px;;
+  max-width: 400px;
+  background-color: transparent;
+  text-align: center;
+  justify-content: center;
+  border-radius: 25px;
+  border: none;
+  flex-direction: column;
+}
+dialog.modal-cameras-info::backdrop{
+  border: none;
+  background-color: rgba(2, 2, 2, 0.5);
+}
+
+.modal-wrapper{
+  background-color: var(--color-bg-table);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-text{
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.modal-header{
+  background-color: var(--color-bg-table);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  line-height: 45px;
+  border-bottom: 2px solid black;
+}
+
+.close-modal-button:hover{
+  background-color: rgb(224, 2, 2);
+  width: 31px;
+  height: 31px;
+  
+}
+
+.close-modal-button{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.green{
+  color: green;
+}
+.red{
+  color: rgb(156, 1, 1);
+}
 
 @keyframes snowfall{
   from{

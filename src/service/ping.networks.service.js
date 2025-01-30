@@ -162,6 +162,10 @@ async function startPingLoop() {
     
 }
 
+async function updateOfflineIPs() {
+    const connection = await mysql.createConnection(dbConfig);
+    const query = 'SELECT '
+}
 
 startRetryLoop();
 startPingLoop();
