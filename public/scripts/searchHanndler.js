@@ -3,6 +3,7 @@ const input = document.querySelector('.search-element');
 const modal = document.querySelector('.modal-cameras-info');
 const closeButton = document.querySelector('.close-modal-button');
 
+
 const idCamera = document.querySelector('.camera-id-modal');
 const ip = document.querySelector('.header-ip');
 const subnet = document.querySelector('.interface-modal');
@@ -67,3 +68,6 @@ button.addEventListener('click', function() {
 closeButton.addEventListener('click', function(){
     modal.close();
 });
+
+
+

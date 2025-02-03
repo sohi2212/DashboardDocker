@@ -2,6 +2,13 @@
 <html lang="ru">
     <head>
         <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+   
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script> 
         <link rel="stylesheet" href="style/nightmode.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -77,6 +84,13 @@
                             </table>
                         </div>
                     </div>
+
+                    <div class="map-button-container">
+                        <button class="open-modal-map">
+                            <img src="./img/285662_map_icon.png" alt="map-icon" class="map-icon">
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -109,7 +123,7 @@
         </div>
         
         <!-- Modal -->
-         <dialog class="modal-cameras-info">
+        <dialog class="modal-cameras-info">
             <header class="modal-header">
                 <h3 class="header-ip">123141241</h3>
                 <button class="close-modal-button">X</button>
@@ -128,11 +142,30 @@
                 <p class="modal-text">Статус камеры: </p>
                 <p class="camera-status">5</p>
             </div>
-         </dialog>
+        </dialog>
         <!-- Modal -->
 
+        <!-- ModalMAP -->
+        <dialog class="modal-map">
+            <div class="wrapper-map">
+                <buttom class="closeMap">Х</buttom>
+                <div id="map"></div>
+            </div>
+            <form id="markerForm">
+                <div class="form-ip-field">
+                    <input class="input-ip-map" type="text" id="ip" name="ip" required placeholder="Введите IP адрес">
+                </div>
+                <div class="form-description-field">
+                    <input class="input-desc-map" type="text" id="description" name="description" required placeholder="Введите описание">
+                </div>
+                <button id="saveMarkerBtn">Сохранить</button>
+                <button id="cancelMarkerBtn">Отмена</button>
+            </form>
+        </dialog>
+        <!-- ModalMAP -->
 
         <script src="scripts/switchstyle.js"></script>
+        <script src="scripts/mapHenndler.js"></script>
         <script src="scripts/snowfalling.js"></script>
         <script src="./monitoringController.js"></script>
         <script src="scripts/searchHanndler.js"></script>
