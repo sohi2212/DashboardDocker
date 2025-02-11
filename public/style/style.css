@@ -333,7 +333,7 @@ td.status-monitoring{
   transition: .3s;
   width: 250px;
   text-align: center;
-  height: 100%;
+  height: 102%;
   z-index: 320;
 }
 .menu-item {
@@ -437,6 +437,7 @@ dialog.modal-cameras-info{
   border-radius: 25px;
   border: none;
   flex-direction: column;
+  visibility: hidden;
 }
 dialog.modal-cameras-info::backdrop{
   border: none;
@@ -636,5 +637,49 @@ dialog.modal-cameras-info::backdrop{
 
   to{
     transform: translateY(calc(100vh + 1.5em));
+  }
+}
+
+@media (max-width: 640px){
+  .tables-information{
+    display: flex;
+    flex-direction: column;
+  }
+  .main-header{
+    font-size: 10px;
+  }
+  .switch{
+    height: 15px;
+    width: 45px;
+  }
+  .main-header .night-mode{
+    top: 32px;
+    right: 70px;
+    height: 55px;
+  }
+  .burger{
+    width: 30px;
+    top: 0px;
+  }
+  .count-default{
+    position: static;
+  }
+  .online-count-default{
+    position: static;
+  }
+  .online-item-curcle{
+    visibility: hidden;
+  }
+  .oflline-item-curcle{
+    visibility: hidden;
+  }
+  .online-count-safecity{
+    position: static;
+  }
+  .count-safe-city{
+    position: static;
+  }
+  .oflline-table{
+    padding: 0;
   }
 }

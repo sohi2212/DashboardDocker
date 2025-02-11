@@ -31,6 +31,7 @@ button.addEventListener('click', function() {
         return response.json();
     })
     .then(data => {
+        modal.style.visibility = 'visible';
         modal.showModal();
         console.log(data);
 
@@ -67,6 +68,7 @@ button.addEventListener('click', function() {
 
 closeButton.addEventListener('click', function(){
     modal.close();
+    modal.style.visibility = 'hidden';
 });
 
 

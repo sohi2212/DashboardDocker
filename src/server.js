@@ -5,6 +5,9 @@ import searchRoutes from './routes/searchRoutes.js';
 import camerasRoutes from './routes/camerasRoutes.js';
 import './service/ping.networks.service.js';
 import Logger from './utils/logger.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const logger = new Logger();
 const app = express();
@@ -26,6 +29,7 @@ app.get('/', (req, res) => {
 app.use('/api', searchRoutes);
 app.use('/api', camerasRoutes);
 
-app.listen(5080, () => {
-    logger.info('Поехала шайтан машина!');
+const port = process.env.APP_PORT || 5080;
+app.listen(port, () => {
+    logger.error('Сервер был запущен/перезапущен по какой-то причине 🤷‍♂️');
 });

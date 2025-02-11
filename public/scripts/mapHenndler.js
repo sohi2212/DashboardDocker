@@ -1,7 +1,7 @@
 const mapOpen = document.querySelector('.map-icon');
 const modalMap = document.querySelector('.modal-map');
 const mapClose = document.querySelector('.closeMap');
-const map = L.map('map').setView([55.910251, 36.860714], 10);
+const map = L.map('map').setView([55.910251, 36.860714], 15);
 const markerForm = document.getElementById('markerForm');
 
 const initMap = () => {
@@ -24,7 +24,7 @@ const loadMarkers = () => {
         .then(data => {
             data.forEach(markerData => {
                 const marker = L.marker([markerData.lat, markerData.lng]).addTo(map);
-                marker.bindPopup(`<b>${markerData.ip}</b><br>${markerData.description}`);
+                marker.bindPopup(`<b>${markerData.IpAddress}</b><br>${markerData.description}`);
             });
         })
         .catch(error => console.error('Error loading markers:', error));

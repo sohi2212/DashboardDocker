@@ -1,13 +1,16 @@
 import mysql from 'mysql2';
 import util from 'util';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const dbConfig = {
-    host: "192.168.17.32",
-    port: "3306",
-    user: "monitoringAdm",
-    password: "Dimok22123",
-    database: "Monitoring",
-    connectionLimit: 10, // Ограничение на количество подключений в пуле
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    connectionLimit: 10 // Ограничение на количество подключений в пуле
 };
 
 class Database {

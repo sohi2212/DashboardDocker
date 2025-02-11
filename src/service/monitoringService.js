@@ -1,5 +1,12 @@
-import { Console } from 'console';
 import db from './db.js';
+import TelegramNotificationBot from './TelegramBot.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const token = process.env.TELEGRAM_TOKEN;
+const chatId = '-1002388090403'; 
+const telegramBot = new TelegramNotificationBot(token, chatId);
 
 export class GetOfflineCameras {
     async getCamerasSafeCity() {
@@ -16,6 +23,7 @@ export class GetOfflineCameras {
 
     async getCamerasDefault() {
         try {
+            await telegramBot.sendMessage(`🛂: Кто-то ломится на сайт🌐`)
             console.log("Метод getCamerasDefault запущен");
             const query = 'SELECT IpAddress, Location, Description, IsMonitored FROM Cameras WHERE IsOnline = "0" AND Description != "SafeCity"';
             const result = await db.query(query);

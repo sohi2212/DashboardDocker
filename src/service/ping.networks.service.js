@@ -2,19 +2,27 @@ import mysql from 'mysql2/promise';
 import ping from "ping";
 import pLimit from 'p-limit';
 import Logger from  '../utils/logger.js';
+import TelegramNotificationBot from './TelegramBot.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const dbConfig = {
-    host: "192.168.17.32",
-    port: "3306",
-    user: "monitoringAdm",
-    password: "Dimok22123",
-    database: "Monitoring"
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 };
 
 // Ограничение на количество параллельных пингов
 const limit = pLimit(20); 
 
 const logger = new Logger();
+
+const token = process.env.TELEGRAM_TOKEN;
+const chatId = '-1002388090403'; 
+const telegramBot = new TelegramNotificationBot(token, chatId);
 
 async function getSubnet(IpAddress) {
     const octets = IpAddress.split('.');
@@ -100,6 +108,16 @@ async function pingAndProcessIP(ip, connection) {
         } else {
             const [result] = await connection.execute(`UPDATE Cameras SET IsOnline = "0" WHERE IpAddress = ?`, [ip]);
             if (result.affectedRows > 0) {
+                if (!ip.startsWith('172.20')){
+                    const [rows, fields] = await connection.execute(`SELECT IsMonitored FROM Cameras WHERE IpAddress = ?`, ip);
+                    if(rows.length > 0){
+                        const monitoringStatus = rows[0].IsMonitored;
+                        if(monitoringStatus === "1"){
+                            await telegramBot.sendMessage(`
+                                ⚠️: Доступность камеры '${ip}'\n💭Состояние камеры: Не отвечает\n🔹Время события: '${logger.getTimeStamp()}'`)
+                        }
+                    }
+                }
                 logger.warn(`Статус '${ip}' изменен на офлайн!`);
                 if(!offlineIPs.includes(ip)){
                     offlineIPs.push(ip);
@@ -129,7 +147,11 @@ async function retryOfflineIPs() {
             if (isAlive) {
                 await connection.execute(`UPDATE Cameras SET IsOnline = "1" WHERE IpAddress = ?`, [ip]);
                 logger.info(`Камера '${ip}' снова online!`);
-                offlineIPs.splice(i, 1); // Удаляем IP из списка
+                if (!ip.startsWith('172.20')){
+                    await telegramBot.sendMessage(`
+                        ✅: Доступность камеры '${ip}'\n💭Состояние камеры: Доступна\n🔹Время события: '${logger.getTimeStamp()}'`)
+                }
+                offlineIPs.splice(i, 1); 
             }
         } catch (error) {
             logger.error(`Ошибка при повторном пинге IP '${ip}': ${error.message}`);
@@ -162,10 +184,6 @@ async function startPingLoop() {
     
 }
 
-async function updateOfflineIPs() {
-    const connection = await mysql.createConnection(dbConfig);
-    const query = 'SELECT '
-}
 
 startRetryLoop();
 startPingLoop();

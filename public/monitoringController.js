@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async() => {
                     tableBody.appendChild(row);
                 });
             } else {
-                console.log("Данные не являются массивом1111!");
+                console.log("Данные не являются массивом!!!!");
                 console.log(data);
             }
         });

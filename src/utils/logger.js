@@ -1,4 +1,10 @@
 import { currentTime } from './timeUtils.js';
+import TelegramNotificationBot from '../service/TelegramBot.js';
+
+const token = process.env.TELEGRAM_TOKEN;
+const chatId = '-1002388090403'; 
+const telegramBot = new TelegramNotificationBot(token, chatId);
+
 
 class Logger {
     constructor() {
@@ -45,10 +51,13 @@ class Logger {
     
     error(message) {
         this.log('ERROR', message);
+        telegramBot.sendMessage(`⛔В работе сайта произошла ошибка: ` + message + '⛔');
     }
     
     critical(message) {
         this.log('CRITICAL', message);
+        const timeStamp = this.getTimeStamp();
+        telegramBot.sendMessage(`⛔В работе сайта произошла критическая ошибка: ` + message + '⛔');
     }
 }
 
